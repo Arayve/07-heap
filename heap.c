@@ -84,7 +84,13 @@ bool heap_encolar(heap_t *heap, void *elem){
 	heap->cantidad++;
 	return true;
 }
-
+size_t heap_cantidad(const heap_t *heap){
+	return(heap->cantidad);
+}
+bool heap_esta_vacio(const heap_t *heap){
+	if(heap->cantidad == 0)return true;
+	return false;
+}
 
 
 
