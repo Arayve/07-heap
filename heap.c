@@ -21,21 +21,25 @@ void _swap(void* arreglo1,void* arreglo2){
 void _upheap(void *arreglo[],size_t pos ,cmp_func_t cmp){
 	if(pos == 0) return;
 	size_t padre = (pos-1)/2;
-	int comparacion cmp(arreglo[pos],arreglo[padre]);
+	int comparacion = cmp(arreglo[pos],arreglo[padre]);
 	if(comparacion < 0)return;
 	_swap(arreglo[pos],arreglo[padre]);
 	_upheap(arreglo,padre,cmp);
 }
 void _downheap(void *arreglo[],size_t n ,size_t pos ,cmp_func_t cmp){// n creo es donde termina el arreglo
 	if(pos >= n) return;
-	size_t = pos_hijo_izq =  2*pos+1;
-	size_t = pos_hijo_der =  2*pos+1;
-	size_t = pos_max = pos;
-	if(pos_hijo_izq < n && cmp(arreglo[pos_hijo_izq],arreglo[pos_max])){
+	size_t  pos_hijo_izq =  2*pos+1;
+	size_t  pos_hijo_der =  2*pos+1;
+	size_t  pos_max = pos;
+	if(pos_hijo_izq < n && cmp(arreglo[pos_hijo_izq],arreglo[pos_max])>0){
 		pos_max = pos_hijo_izq;
 	}
-	if(pos_hijo_der < n && cmp(arreglo[pos_hijo_der],arreglo[pos_max])){
+	if(pos_hijo_der < n && cmp(arreglo[pos_hijo_der],arreglo[pos_max])>0){
 		pos_max = pos_hijo_der;
+	}
+	if(pos != pos_max){
+		_swap(arreglo[pos],arreglo[pos_max]);
+		_downheap(arreglo,n,pos_max,cmp);
 	}
 }
 heap_t* heap_crear(cmp_func_t cmp){
