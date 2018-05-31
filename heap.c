@@ -1,10 +1,11 @@
 #include "heap.h"
 #include <stdlib.h>
 
+#define POSICION_DEL_MAX 0
 #define CANTIDAD_INICIAL 0
 #define CAPACIDAD_INICIAL 24
-#define REDIMENSIONADOR_AUM 2
-#define REDIMENSIONADOR_DIS 2
+#define REDIMENSIONADOR 2
+#define TAMANIO_RELATIVO 4
 
 //hujo izquierdo = 2*pos+1
 //hijo derecho = 2*pos+2
@@ -77,7 +78,7 @@ bool _redimenzinar_heap(heap_t *heap, size_t tam_nuevo){
 }
 bool heap_encolar(heap_t *heap, void *elem){
 	if(heap->cantidad == heap->capacidad){
-		size_t tam_nuevo = heap->capacidad * REDIMENSIONADOR_AUM;
+		size_t tam_nuevo = heap->capacidad * REDIMENSIONADOR;
 		if(!_redimenzinar_heap(heap,tam_nuevo)){
 			return false;
 		}
@@ -94,9 +95,31 @@ bool heap_esta_vacio(const heap_t *heap){
 	if(heap->cantidad == 0)return true;
 	return false;
 }
-
-
-
+void *heap_ver_max(const heap_t *heap){
+	if(!heap)return NULL;
+	if(heap->cantidad == 0)return NULL;
+	return(heap->tabla[POSICION_DEL_MAX]);
+}
+void *heap_desencolar(heap_t *heap){
+	if(!heap) return NULL;
+	if(heap->cantidad == 0 )return NULL;
+	if(heap->cantidad < heap->capacidad/TAMANIO_RELATIVO && CAPACIDAD_INICIAL < heap->cantidad){
+		size_t tam_nuevo = heap->capacidad/REDIMENSIONADOR;
+		if(!_redimenzinar_heap(heap,tam_nuevo)){
+			return false;
+		}
+	}
+	void* elem = heap->tabla[POSICION_DEL_MAX];
+	
+	size_t pos_ultimo_elemento = heap->cantidad-1;
+	_swap(heap->tabla[POSICION_DEL_MAX],heap->tabla[pos_ultimo_elemento]);
+	heap->tabla[pos_ultimo_elemento] = NULL;
+	-- heap->cantidad;
+	-- pos_ultimo_elemento; 
+	_downheap(heap->tabla,pos_ultimo_elemento,POSICION_DEL_MAX,heap->cmp);
+	
+	return elem;
+}
 
 
 
