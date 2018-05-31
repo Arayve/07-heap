@@ -103,35 +103,54 @@ void pruebas_heap_5_elementos(){
 
 	heap_destruir(heap,NULL);
 }
-/*
 void prueba_heap_sort(){
 
-	printf("\n");
+	printf("\n~~~ PRUEBAS HEAP SORT ~~~\n" );
 
-	void** numeros;
+	void* numeros[10];
 
-	int num = 1, num2 = 4, num3 = 2, num4 = 100, num5 = 92, num6 = 22, num7 = 7, num8 = 80, num9 = 0, num10 = 42;
+	int num1=5;
+    int num2=2;
+    int num3=10;
+    int num4=12;
+    int num5=23;
+    int num6=1234;
+    int num7=213;
+    int num8=11;
+    int num9=1510;
+    int num10=23;
 
-	numeros[0] = &num;
-	numeros[1] = &num2;
-	numeros[2] = &num3;
-	numeros[3] = &num4;
-	numeros[4] = &num5;
-	numeros[5] = &num6;
-	numeros[6] = &num7;
-	numeros[7] = &num8;
-	numeros[8] = &num9;
-	numeros[9] = &num10;
+    
+    int *puntero1=&num1;
+    int *puntero2=&num2;
+    int *puntero3=&num3;
+    int *puntero4=&num4;
+    int *puntero5=&num5;
+    int *puntero6=&num6;
+    int *puntero7=&num7;
+    int *puntero8=&num8;
+    int *puntero9=&num9;
+    int *puntero10=&num10;
+
+	numeros[0] = puntero1;
+	numeros[1] = puntero2;
+	numeros[2] = puntero3;
+	numeros[3] = puntero4;
+	numeros[4] = puntero5;
+	numeros[5] = puntero6;
+	numeros[6] = puntero7;
+	numeros[7] = puntero8;
+	numeros[8] = puntero9;
+	numeros[9] = puntero10;
 
 	heap_sort(numeros, 10, cmp_int);
-
+	
 	for(size_t i = 0; i < 10; i++){
-		printf("| %d |", numeros[i]);
+		int* valor = numeros[i];
+		printf("| %d |",*valor );
 	}
-
 	printf("\n");
 }
-*/
 void prueba_heap_volumen(){
 
 	printf("\n~~~ PRUEBA HEAP VOLUMEN~~~\n");
@@ -218,7 +237,7 @@ void pruebas_heap_alumno(){
 	prueba_heap_vacio();
 	prueba_heap_1_elemento();
 	pruebas_heap_5_elementos();
-//	prueba_heap_sort();
+	prueba_heap_sort();
 	prueba_heap_volumen();
 	prueba_heap_crear_arreglo();
 }
