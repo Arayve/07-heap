@@ -120,13 +120,14 @@ void *heap_desencolar(heap_t *heap){
 	
 	return elem;
 }
-
-
-
-
-
-
-
-
-
+void heap_destruir(heap_t *heap, void destruir_elemento(void *e)){
+	while(!heap_esta_vacio(heap)){
+		void* elem = heap_desencolar(heap);
+		if(destruir_elemento){
+			destruir_elemento(elem);
+		}
+	}
+	free(heap->tabla);
+    free(heap);
+}
 
