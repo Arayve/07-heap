@@ -1,5 +1,5 @@
 #include "heap.h"
-#include <stdlib.h>
+#include <stdlib.h> //por el sizeof
 
 #define POSICION_DEL_MAX 0
 #define CANTIDAD_INICIAL 0
@@ -132,15 +132,14 @@ void heap_destruir(heap_t *heap, void destruir_elemento(void *e)){
 }
 void heap_sort(void *elementos[], size_t cant, cmp_func_t cmp){
 
-	
 	heap_t* heap = heap_crear_arr(elementos,cant,cmp);
-	size_t pos_act = 0; 
-	while(!heap_esta_vacio(heap)){
-		void* elem = heap_desencolar(heap);
+	size_t pos_act = cant-1; 
+	while(!heap_esta_vacio(heap)){//Le pregunte a martin y dice que esta funcion debe ordenar de menor a mayor respecto de lo que cmp 
+		void* elem = heap_desencolar(heap);// mayor y menor
 		elementos[pos_act] = elem;
-		++pos_act;
+		--pos_act;
 	}
-	heap_destruir(heap);
+	heap_destruir(heap,NULL);
 }
 
 

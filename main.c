@@ -1,9 +1,9 @@
 #include "testing.h"
+#include "heap.h"
 #include <stdlib.h>
 #include <stdio.h>
 
 void pruebas_heap_alumno(void);
-
 /* ******************************************************************
  *                        PROGRAMA PRINCIPAL
  * *****************************************************************/
