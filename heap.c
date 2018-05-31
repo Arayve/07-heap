@@ -61,7 +61,10 @@ heap_t* heap_crear(cmp_func_t cmp){
 heap_t *heap_crear_arr(void *arreglo[], size_t n, cmp_func_t cmp){
 	heap_t* heap = heap_crear(cmp);
 	if(!heap) return NULL;
-	/*Falta agregar elemento del arreglo*/
+	size_t pos_act = 0;
+	while(pos_act < n){
+		if(!heap_encolar(heap,arreglo[pos_act]))return NULL;
+	}
 	return heap;
 }
 bool _redimenzinar_heap(heap_t *heap, size_t tam_nuevo){
