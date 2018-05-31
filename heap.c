@@ -2,7 +2,10 @@
 #include <stdlib.h>
 
 #define CANTIDAD_INICIAL 0
-#define CAPACIDAD_INICIAL 50
+#define CAPACIDAD_INICIAL 24
+#define REDIMENSIONADOR_AUM 2
+#define REDIMENSIONADOR_DIS 2
+
 //hujo izquierdo = 2*pos+1
 //hijo derecho = 2*pos+2
 //padre = (pos -1 )/2
@@ -60,6 +63,26 @@ heap_t *heap_crear_arr(void *arreglo[], size_t n, cmp_func_t cmp){
 	if(!heap) return NULL;
 	/*Falta agregar elemento del arreglo*/
 	return heap;
+}
+bool _redimenzinar_heap(heap_t *heap, size_t tam_nuevo){
+	void** tabla_nueva = realloc (heap->tabla, tam_nuevo*sizeof(void*));
+	if(!tam_nuevo) return false;
+	heap->tabla = tabla_nueva;
+	heap->capacidad = tam_nuevo;
+	return true;
+
+}
+bool heap_encolar(heap_t *heap, void *elem){
+	if(heap->cantidad == heap->capacidad){
+		size_t tam_nuevo = heap->capacidad * REDIMENSIONADOR_AUM;
+		if(!_redimenzinar_heap(heap,tam_nuevo)){
+			return false;
+		}
+	}
+	heap->tabla[heap->cantidad]= elem;
+	_upheap(heap->tabla,heap->cantidad,heap->cmp);
+	heap->cantidad++;
+	return true;
 }
 
 
