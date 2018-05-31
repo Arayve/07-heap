@@ -85,7 +85,7 @@ bool heap_encolar(heap_t *heap, void *elem){
 	}
 	heap->tabla[heap->cantidad]= elem;
 	_upheap(heap->tabla,heap->cantidad,heap->cmp);
-	heap->cantidad++;
+	++heap->cantidad;
 	return true;
 }
 size_t heap_cantidad(const heap_t *heap){
@@ -130,4 +130,17 @@ void heap_destruir(heap_t *heap, void destruir_elemento(void *e)){
 	free(heap->tabla);
     free(heap);
 }
+void heap_sort(void *elementos[], size_t cant, cmp_func_t cmp){
+
+	
+	heap_t* heap = heap_crear_arr(elementos,cant,cmp);
+	size_t pos_act = 0; 
+	while(!heap_esta_vacio(heap)){
+		void* elem = heap_desencolar(heap);
+		elementos[pos_act] = elem;
+		++pos_act;
+	}
+	heap_destruir(heap);
+}
+
 
