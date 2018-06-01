@@ -132,7 +132,7 @@ void heap_sort(void *elementos[], size_t cant, cmp_func_t cmp){
 	heap_t* heap = heap_crear_arr(elementos,cant,cmp);
 	size_t pos_act = cant-1; 
 	while(!heap_esta_vacio(heap)){ 
-		void* elem = heap_desencolar(heap);/
+		void* elem = heap_desencolar(heap);
 		elementos[pos_act] = elem;
 		--pos_act;
 	}
