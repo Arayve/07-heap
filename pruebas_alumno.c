@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define TAM 5000
 #define TAM_ARREGLO 10
@@ -118,7 +119,7 @@ void prueba_heap_sort(){
     int num7=213;
     int num8=11;
     int num9=1510;
-    int num10=23;
+    int num10=101;
 
     
     int *puntero1=&num1;
@@ -145,11 +146,22 @@ void prueba_heap_sort(){
 
 	heap_sort(numeros, 10, cmp_int);
 	
-	for(size_t i = 0; i < 10; i++){
-		int* valor = numeros[i];
-		printf("| %d |",*valor );
+	bool ordenado = true;
+
+	for(size_t i = 1; i < 10; i++){
+		int* valor1 = numeros[i-1];
+		int* valor2 = numeros[i];
+		if((*valor1) > (*valor2)){
+			ordenado = false;
+			break;
+		}
 	}
-	printf("\n");
+
+	if(ordenado){
+		print_test("Está ordenado", true);
+	}else{
+		print_test("No está ordenado", false);
+	}
 }
 void prueba_heap_volumen(){
 
