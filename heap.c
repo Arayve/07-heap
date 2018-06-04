@@ -127,14 +127,18 @@ void heap_destruir(heap_t *heap, void destruir_elemento(void *e)){
 	free(heap->datos);
     free(heap);
 }
+void heapify(void* elementos[], size_t cant, cmp_func_t cmp){
+
+	for(size_t i = cant; i > 0; i--){
+		_downheap(elementos, cant, i-1, cmp);
+	}
+}
 void heap_sort(void *elementos[], size_t cant, cmp_func_t cmp){
 
-	heap_t* heap = heap_crear_arr(elementos,cant,cmp);
-	size_t pos_act = cant-1; 
-	while(!heap_esta_vacio(heap)){ 
-		void* elem = heap_desencolar(heap);
-		elementos[pos_act] = elem;
-		--pos_act;
+	heapify(elementos, cant, cmp);
+
+	for(size_t i = cant; i > 0; i--){
+		_downheap(elementos, i-1, 0, cmp);
+		_swap(elementos, 0, i-1);
 	}
-	heap_destruir(heap,NULL);
 }
