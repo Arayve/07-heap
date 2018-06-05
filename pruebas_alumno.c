@@ -13,12 +13,22 @@ int cmp_str(const void* a, const void* b){
 	return strcmp(a, b);
 }
 
+int cmp_int_invertido(const void* A, const void* B){
+
+	const int* a = A, *b = B;
+
+	if((*a) > (*b)) return -1;
+	if((*a) < (*b)) return 1;
+
+	return 0;
+}
+
 int cmp_int(const void* A, const void* B){
 
 	const int* a = A, *b = B;
 
-	if(*a < *b) return -1;
-	if(*a > *b) return 1;
+	if((*a) < (*b)) return -1;
+	if((*a) > (*b)) return 1;
 
 	return 0;
 }
@@ -120,8 +130,7 @@ void prueba_heap_sort(){
     int num8=11;
     int num9=1510;
     int num10=101;
-
-    
+ 
     int *puntero1=&num1;
     int *puntero2=&num2;
     int *puntero3=&num3;
@@ -158,9 +167,28 @@ void prueba_heap_sort(){
 	}
 
 	if(ordenado){
-		print_test("Está ordenado", true);
+		print_test("Está ordenado de menor a mayor", true);
 	}else{
-		print_test("No está ordenado", false);
+		print_test("No está ordenado de menor a mayor", false);
+	}
+
+	heap_sort(numeros, 10, cmp_int_invertido);
+
+	ordenado = true;
+
+	for(size_t i = 1; i < 10; i++){
+		int* valor1 = numeros[i-1];
+		int* valor2 = numeros[i];
+		if((*valor1) < (*valor2)){
+			ordenado = false;
+			break;
+		}
+	}
+
+	if(ordenado){
+		print_test("Está ordenado de mayor a menor", true);
+	}else{
+		print_test("No está ordenado de mayor a menor", false);
 	}
 }
 void prueba_heap_volumen(){

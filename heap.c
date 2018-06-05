@@ -138,7 +138,7 @@ void heap_sort(void *elementos[], size_t cant, cmp_func_t cmp){
 	heapify(elementos, cant, cmp);
 
 	for(size_t i = cant; i > 0; i--){
-		_downheap(elementos, i-1, 0, cmp);
+		_downheap(elementos, i, 0, cmp);
 		_swap(elementos, 0, i-1);
 	}
 }
