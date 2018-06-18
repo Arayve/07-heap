@@ -199,15 +199,11 @@ void prueba_heap_volumen(){
 
 	int numeros[TAM], tope = TAM;
 
-	for(int i = 0; i < tope; i++) numeros[i] = i;
+	for(int i = 0; i < tope; i++) numeros[i] = rand()%100;
 
 	for(size_t i = 0; i < tope; i++){
 		if(!heap_encolar(heap, &numeros[i])){
 			print_test("NO se pudieron encolar los elementos", false);
-			break;
-		}
-		if(!(heap_ver_max(heap) == &numeros[i])){
-			print_test("NO es el maximo", false);
 			break;
 		}
 		if(heap_cantidad(heap) != i+1){
@@ -217,17 +213,10 @@ void prueba_heap_volumen(){
 	}
 
 	print_test("Se pudieron encolar los elementos", true);
-	print_test("heap_cantidad en volumen (5000)", heap_cantidad(heap) == tope);
+	print_test("heap_cantidad en volumen", heap_cantidad(heap) == tope);
 
 	for(size_t i = tope; i > 0; i--){
-		if(!(heap_ver_max(heap) == &numeros[i-1])){
-			print_test("NO es el maximo", false);
-			break;
-		}
-		if(!(heap_desencolar(heap) == &numeros[i-1])){
-			print_test("NO se pudieron desencolar los elementos", false);
-			break;
-		}
+		heap_desencolar(heap);
 		if(!(heap_cantidad(heap) == i-1)){
 			print_test("heap_cantidad en volumen", false);
 			break;
