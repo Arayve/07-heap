@@ -141,8 +141,8 @@ void* heap_desencolar(heap_t *heap){
 }
 void heap_destruir(heap_t *heap, void destruir_elemento(void *e)){
 
-	for(size_t i = 0; i < heap->cantidad; i++){
-		if(destruir_elemento){
+	if(destruir_elemento){
+		for(size_t i = 0; i < heap->cantidad; i++){
 			destruir_elemento(heap->datos[i]);
 		}
 	}
@@ -155,7 +155,7 @@ void heapify(void* elementos[], size_t cant, cmp_func_t cmp){
 	size_t ult_padre = (cant/2)-1;
 
 	for(size_t i = ult_padre; i > 0; i--){
-		_downheap(elementos, cant, i-1, cmp);
+		_downheap(elementos, cant, i, cmp);
 	}
 }
 void heap_sort(void *elementos[], size_t cant, cmp_func_t cmp){
